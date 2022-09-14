@@ -13,12 +13,22 @@ function MainContainer() {
     setSelectedCategory(category)
   }
 
-  // function addToPortfolio(){
-  //   const newPortfolio = [...portfolio, stock]
-  //   setPortfolio(newPortfolio)
-  //   console.log(stock, newPortfolio)
-  // }
+  function addToPortfolio(stock){
+    //this is so we can't add the same stock to portfolio more than once
+    if (portfolio.indexOf(stock) !== -1){
+      setPortfolio(portfolio)
+    }
+    else{
+      const newPortfolio = [...portfolio, stock]
+      setPortfolio(newPortfolio)
+    }
+  }
   
+  function removeStock(stock){
+    const newPortfolio = portfolio.filter((asset) => asset !== stock)
+    setPortfolio(newPortfolio)
+  }
+
   const stocksFiltered = stocks
     .sort((stock1, stock2) => {
       if(priceCheck === false){
@@ -54,10 +64,10 @@ function MainContainer() {
       />
       <div className="row">
         <div className="col-8">
-          <StockContainer addToPortfolio={null} stocks={stocksFiltered} setStocks={setStocks}/>
+          <StockContainer addToPortfolio={addToPortfolio} stocks={stocksFiltered} setStocks={setStocks}/>
         </div>
         <div className="col-4">
-          <PortfolioContainer stocks={portfolioFiltered} />
+          <PortfolioContainer removeStock={removeStock} stocks={portfolioFiltered} />
         </div>
       </div>
     </div>

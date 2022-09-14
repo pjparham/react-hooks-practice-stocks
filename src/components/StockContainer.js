@@ -11,7 +11,7 @@ function StockContainer({ stocks, setStocks, addToPortfolio }) {
   }, [])
 
   const stockList = stocks.map((stock) => {
-    return <Stock addToPortfolio={addToPortfolio} key={stock.id} stock={stock} />
+    return <Stock onStockClick={addToPortfolio} key={stock.id} stock={stock} />
   })
 
   return (

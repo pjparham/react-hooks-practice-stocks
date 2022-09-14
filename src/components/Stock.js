@@ -1,10 +1,14 @@
 import React from "react";
 
-function Stock({ stock, addToPortfolio }) {
-  const {ticker, name, type, price} = stock
+function Stock({ stock, onStockClick }) {
+  const {ticker, name, price} = stock
+
+  function handleClick(){
+    onStockClick(stock) 
+  }
 
   return (
-    <div onClick={(stock) => addToPortfolio(stock)}>
+    <div onClick={handleClick}>
       <div className="card">
         <div className="card-body">
           <h5 className="card-title">{name}</h5>
